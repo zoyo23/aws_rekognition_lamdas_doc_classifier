@@ -1,18 +1,24 @@
 service: docs-classifier
 
+useDotenv: true
+
 provider:
   name: aws
   runtime: nodejs12.x
-  region : us-east-2  
+  region: ${env:AWS_REGION}
+  environment:
+    LAYER_INFRA_DOCS: ${env:LAYER_INFRA_DOCS}
+    PATH_LAYER: ${env:PATH_LAYER}
 
 functions:
   classifier:
     handler: handler.handle
     layers:
-      - arn:aws:lambda:us-east-2:601408256835:layer:infra-docs:2
+      - ${env:LAYER_INFRA_DOCS}
     events:
       - httpApi:
           path: /classifier
-          method: get
+          method: get          
+
 plugins:
   - serverless-offline # Needed to run & debug locally

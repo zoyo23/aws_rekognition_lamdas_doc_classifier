@@ -1,18 +1,25 @@
 service: docs-text-extract
 
+useDotenv: true
+
 provider:
   name: aws
   runtime: nodejs12.x
-  region : us-east-2  
+  region : ${env:AWS_REGION}
+  environment:
+    LAYER_INFRA_DOCS: ${env:LAYER_INFRA_DOCS}
+    PATH_LAYER: ${env:PATH_LAYER}
 
 functions:
   text-extract:
     handler: handler.handle
     layers:
-      - arn:aws:lambda:us-east-2:601408256835:layer:infra-docs:2
+      - ${env:LAYER_INFRA_DOCS}
     events:
       - httpApi:
           path: /extract
           method: get
+
+
 plugins:
   - serverless-offline # Needed to run & debug locally

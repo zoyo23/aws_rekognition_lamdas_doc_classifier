@@ -1,9 +1,14 @@
 service: docs-layer
 
+useDotenv: true
+
 provider:
   name: aws
   runtime: nodejs12.x
-  region : us-east-2  
+  region : ${env:AWS_REGION}
+  environment:
+    LAYER_INFRA_DOCS: ${env:LAYER_INFRA_DOCS}
+    PATH_LAYER: ${env:PATH_LAYER}
 
 layers:
   infra-docs:

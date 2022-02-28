@@ -1,6 +1,6 @@
 'use strict';
 
-const infra_docs = require('infra-docs')
+const infra_docs = require(process.env.PATH_LAYER);
 
 module.exports.handle = async (event) => {
 

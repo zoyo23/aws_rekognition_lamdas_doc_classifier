@@ -4,6 +4,6 @@
     "serverless-offline": "^8.5.0"
   },
   "scripts": {
-        "debug": "node --inspect node_modules/serverless/bin/serverless offline start --httpPort 4000 --noTimeout"
+        "debug": "node --inspect node_modules/serverless/bin/serverless offline start --httpPort 4000 --noTimeout --stage development"
     }
 }
